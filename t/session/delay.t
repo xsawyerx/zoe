@@ -17,7 +17,7 @@ Zoe::Session->create(
             push @events, 'next';
 
             ++$_[HEAP]->{'count'} >= 3
-                or $_[SESSION]->yield('next');
+                or $_[KERNEL]->yield( Thingie => 'next' );
         },
 
         delayed => sub { undef $_[HEAP]->{'timer'}; $delay++ },

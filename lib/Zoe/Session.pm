@@ -5,18 +5,18 @@ use AnyEvent;
 
 our $id = 0;
 
-sub ID     {$id}
+sub ID     { $_[0]->{'id'} }
 sub heap   { $_[0]->{'heap'} }
 sub events { $_[0]->{'events'} }
 
 sub create {
     my ( $class, %opts ) = @_;
-    $id++;
 
     my $self = bless {
         events  => $opts{'events'},
         options => $opts{'options'} || {},
         heap    => $opts{'heap'}    || {},
+        id      => $opts{'ID'}      || $id++,
     }, $class;
 
     $Zoe::KERNEL->add_session($self);
